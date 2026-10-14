@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ExamAllocate · Admin Analytics</title>
+  <link rel="stylesheet" href="css/admin-analytics.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="js/admin-analytics.js"></script>
+</head>
+<body>
+  <header class="topbar"><div class="brand"><span class="brand-mark">EA</span><div><strong>ExamAllocate</strong><small>ADMIN ANALYTICS</small></div></div><a href="admin.html" class="back-link">← Existing admin</a></header>
+  <main class="page">
+    <section class="intro"><div><p class="eyebrow">OVERVIEW</p><h1>Registration insights</h1><p class="muted">A live view of registrations and operational workload from your database.</p></div><div class="refresh-wrap"><span id="lastUpdated" class="muted">Not connected</span><button id="refreshBtn" class="btn btn-light">↻ Refresh</button></div></section>
+    <section class="auth card"><div><h2>Administrator access</h2><p class="muted">Enter the backend-configured admin key to load protected statistics.</p></div><div class="key-controls"><input id="adminKey" type="password" autocomplete="current-password" placeholder="Enter admin key"><button id="toggleKey" class="btn btn-light" type="button" aria-label="Show admin key">Show</button><button id="connectBtn" class="btn btn-primary">Load dashboard</button></div></section>
+    <div id="message" class="message" role="status">Enter the admin key, then select “Load dashboard”.</div>
+    <section class="kpis" aria-label="Key metrics">
+      <article class="kpi card"><span>Total registrations</span><strong id="totalRegistrations">—</strong><small>All saved registrations</small></article>
+      <article class="kpi card"><span>Courses</span><strong id="totalCourses">—</strong><small>Distinct exam courses</small></article>
+      <article class="kpi card"><span>Seats allocated</span><strong id="totalAllocated">—</strong><small id="allocationRate">—</small></article>
+      <article class="kpi card"><span>Awaiting allocation</span><strong id="pendingAllocation">—</strong><small>Registrations without a seat</small></article>
+      <article class="kpi card"><span>Open grievances</span><strong id="openGrievances">—</strong><small id="totalGrievances">— total grievances</small></article>
+      <article class="kpi card"><span>Pending accommodations</span><strong id="pendingAccommodations">—</strong><small>Requests for admin review</small></article>
+    </section>
+    <section class="charts-grid">
+      <article class="card chart-card"><div class="card-heading"><div><h2>Registration share by course</h2><p class="muted">Each course as a percentage of all registrations</p></div></div><div class="chart-area"><canvas id="coursePie"></canvas></div></article>
+      <article class="card chart-card"><div class="card-heading"><div><h2>Course comparison</h2><p class="muted">Number of registered students per course</p></div></div><div class="chart-area chart-area-tall"><canvas id="courseBar"></canvas></div></article>
+      <article class="card chart-card"><div class="card-heading"><div><h2>Registration city</h2><p class="muted">Candidate city recorded on the form</p></div></div><div class="chart-area"><canvas id="cityChart"></canvas></div></article>
+      <article class="card chart-card"><div class="card-heading"><div><h2>Grievance status</h2><p class="muted">Current status counts</p></div></div><div class="chart-area"><canvas id="grievanceChart"></canvas></div></article>
+    </section>
+    <section class="card table-card"><div class="card-heading table-heading"><div><h2>Course-wise details</h2><p class="muted">Use this table to compare registration and allocation status.</p></div><input id="courseSearch" class="search" placeholder="Search course…" aria-label="Search courses"></div><div class="table-scroll"><table><thead><tr><th>Course</th><th>Registrations</th><th>Share</th><th>Allocated</th><th>Pending</th><th>ML demand group</th></tr></thead><tbody id="courseRows"><tr><td colspan="6" class="empty">Load the dashboard to see data.</td></tr></tbody></table></div><p class="footnote">ML groups use K-means clustering on current course registration counts. They describe relative demand in this dataset; they do not predict future enrolment.</p></section>
+    <footer>ExamAllocate · Admin analytics · Statistics are read from the backend API and persisted database records.</footer>
+  </main>
+</body></html>

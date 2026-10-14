@@ -77,3 +77,17 @@ The frontend/backend were revised to make the candidate flow more realistic:
 - Registration lookup uses application number + registered email.
 - Existing allocation, admit-card and grievance modules continue to use the registration ID internally.
 - The frontend was redesigned as an NPTEL-style academic demonstration portal with a structured header, registration sections, alerts, confirmation, status view and hall ticket.
+
+
+## Admin Analytics dashboard add-on
+
+The project now includes a separate analytics page at `frontend/admin-analytics.html`. It reads live data through the protected backend endpoint `GET /api/analytics/overview` and requires the configured `X-Admin-Key`. The page includes KPI cards, course registration-share pie chart, course comparison chart, city distribution, grievance status, course-wise table, and a browser-side K-means grouping of current course registration counts (descriptive grouping, not future prediction).
+
+Added files:
+- `backend/src/main/java/com/examallocate/controller/AnalyticsDashboardController.java`
+- `backend/src/main/java/com/examallocate/service/AnalyticsDashboardService.java`
+- `frontend/admin-analytics.html`
+- `frontend/css/admin-analytics.css`
+- `frontend/js/admin-analytics.js`
+
+Open `admin-analytics.html` using the existing frontend server. Confirm `BACKEND_BASE` in `frontend/js/admin-analytics.js` matches the backend laptop IP and `examallocate.admin-key` in `backend/src/main/resources/application.properties`. The Chart.js graph library is loaded from a CDN, so the browser needs internet access for charts. No new database tables are required. The added Java code should be built and tested against the current database before demo use.
