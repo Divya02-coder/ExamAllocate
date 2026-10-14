@@ -549,8 +549,167 @@ VALUES
 
 
 /* ============================================================
-   20. INITIAL ROOM-SESSION OCCUPANCY
-   Empty at zero. AllocationService increases this atomically.
+   20. INITIAL CANDIDATE DATA
+   150 sample candidates are preloaded for demonstration/testing.
+   ============================================================ */
+
+INSERT INTO student
+(application_no, name, dob, gender, category, phone, email, address, city, state, pincode, preferred_city_1, preferred_city_2, school_name)
+VALUES
+('APP20260001', 'Aarav Sharma', '2001-02-02', 'Male', 'General', '9810000001', 'candidate001@examallocate.local', 'House 101, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260002', 'Aditi Sharma', '2002-03-03', 'Female', 'OBC', '9810000002', 'candidate002@examallocate.local', 'House 102, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260003', 'Akash Sharma', '2003-04-04', 'Male', 'SC', '9810000003', 'candidate003@examallocate.local', 'House 103, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260004', 'Ananya Sharma', '2004-05-05', 'Female', 'ST', '9810000004', 'candidate004@examallocate.local', 'House 104, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260005', 'Arjun Sharma', '2005-06-06', 'Male', 'General', '9810000005', 'candidate005@examallocate.local', 'House 105, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260006', 'Avni Sharma', '2000-07-07', 'Female', 'OBC', '9810000006', 'candidate006@examallocate.local', 'House 106, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260007', 'Ayush Sharma', '2001-08-08', 'Male', 'SC', '9810000007', 'candidate007@examallocate.local', 'House 107, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260008', 'Diya Sharma', '2002-09-09', 'Female', 'ST', '9810000008', 'candidate008@examallocate.local', 'House 108, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260009', 'Ishaan Sharma', '2003-10-10', 'Male', 'General', '9810000009', 'candidate009@examallocate.local', 'House 109, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260010', 'Isha Sharma', '2004-11-11', 'Female', 'OBC', '9810000010', 'candidate010@examallocate.local', 'House 110, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260011', 'Kabir Sharma', '2005-12-12', 'Male', 'SC', '9810000011', 'candidate011@examallocate.local', 'House 111, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260012', 'Kavya Sharma', '2000-01-13', 'Female', 'ST', '9810000012', 'candidate012@examallocate.local', 'House 112, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260013', 'Karan Sharma', '2001-02-14', 'Male', 'General', '9810000013', 'candidate013@examallocate.local', 'House 113, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260014', 'Kiara Sharma', '2002-03-15', 'Female', 'OBC', '9810000014', 'candidate014@examallocate.local', 'House 114, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260015', 'Manav Sharma', '2003-04-16', 'Male', 'SC', '9810000015', 'candidate015@examallocate.local', 'House 115, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260016', 'Meera Sharma', '2004-05-17', 'Female', 'ST', '9810000016', 'candidate016@examallocate.local', 'House 116, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260017', 'Nikhil Sharma', '2005-06-18', 'Male', 'General', '9810000017', 'candidate017@examallocate.local', 'House 117, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260018', 'Nisha Sharma', '2000-07-19', 'Female', 'OBC', '9810000018', 'candidate018@examallocate.local', 'House 118, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260019', 'Pranav Sharma', '2001-08-20', 'Male', 'SC', '9810000019', 'candidate019@examallocate.local', 'House 119, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260020', 'Priya Sharma', '2002-09-21', 'Female', 'ST', '9810000020', 'candidate020@examallocate.local', 'House 120, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260021', 'Rahul Sharma', '2003-10-22', 'Male', 'General', '9810000021', 'candidate021@examallocate.local', 'House 121, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260022', 'Riya Sharma', '2004-11-23', 'Female', 'OBC', '9810000022', 'candidate022@examallocate.local', 'House 122, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260023', 'Rohan Sharma', '2005-12-24', 'Male', 'SC', '9810000023', 'candidate023@examallocate.local', 'House 123, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260024', 'Sakshi Sharma', '2000-01-25', 'Female', 'ST', '9810000024', 'candidate024@examallocate.local', 'House 124, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260025', 'Sameer Sharma', '2001-02-26', 'Male', 'General', '9810000025', 'candidate025@examallocate.local', 'House 125, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260026', 'Sana Sharma', '2002-03-27', 'Female', 'OBC', '9810000026', 'candidate026@examallocate.local', 'House 126, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260027', 'Shivam Sharma', '2003-04-01', 'Male', 'SC', '9810000027', 'candidate027@examallocate.local', 'House 127, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260028', 'Shreya Sharma', '2004-05-02', 'Female', 'ST', '9810000028', 'candidate028@examallocate.local', 'House 128, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260029', 'Tanvi Sharma', '2005-06-03', 'Male', 'General', '9810000029', 'candidate029@examallocate.local', 'House 129, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260030', 'Varun Sharma', '2000-07-04', 'Female', 'OBC', '9810000030', 'candidate030@examallocate.local', 'House 130, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260031', 'Aarav Patil', '2001-08-05', 'Male', 'SC', '9810000031', 'candidate031@examallocate.local', 'House 131, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260032', 'Aditi Patil', '2002-09-06', 'Female', 'ST', '9810000032', 'candidate032@examallocate.local', 'House 132, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260033', 'Akash Patil', '2003-10-07', 'Male', 'General', '9810000033', 'candidate033@examallocate.local', 'House 133, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260034', 'Ananya Patil', '2004-11-08', 'Female', 'OBC', '9810000034', 'candidate034@examallocate.local', 'House 134, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260035', 'Arjun Patil', '2005-12-09', 'Male', 'SC', '9810000035', 'candidate035@examallocate.local', 'House 135, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260036', 'Avni Patil', '2000-01-10', 'Female', 'ST', '9810000036', 'candidate036@examallocate.local', 'House 136, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260037', 'Ayush Patil', '2001-02-11', 'Male', 'General', '9810000037', 'candidate037@examallocate.local', 'House 137, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260038', 'Diya Patil', '2002-03-12', 'Female', 'OBC', '9810000038', 'candidate038@examallocate.local', 'House 138, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260039', 'Ishaan Patil', '2003-04-13', 'Male', 'SC', '9810000039', 'candidate039@examallocate.local', 'House 139, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260040', 'Isha Patil', '2004-05-14', 'Female', 'ST', '9810000040', 'candidate040@examallocate.local', 'House 140, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260041', 'Kabir Patil', '2005-06-15', 'Male', 'General', '9810000041', 'candidate041@examallocate.local', 'House 141, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260042', 'Kavya Patil', '2000-07-16', 'Female', 'OBC', '9810000042', 'candidate042@examallocate.local', 'House 142, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260043', 'Karan Patil', '2001-08-17', 'Male', 'SC', '9810000043', 'candidate043@examallocate.local', 'House 143, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260044', 'Kiara Patil', '2002-09-18', 'Female', 'ST', '9810000044', 'candidate044@examallocate.local', 'House 144, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260045', 'Manav Patil', '2003-10-19', 'Male', 'General', '9810000045', 'candidate045@examallocate.local', 'House 145, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260046', 'Meera Patil', '2004-11-20', 'Female', 'OBC', '9810000046', 'candidate046@examallocate.local', 'House 146, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260047', 'Nikhil Patil', '2005-12-21', 'Male', 'SC', '9810000047', 'candidate047@examallocate.local', 'House 147, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260048', 'Nisha Patil', '2000-01-22', 'Female', 'ST', '9810000048', 'candidate048@examallocate.local', 'House 148, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260049', 'Pranav Patil', '2001-02-23', 'Male', 'General', '9810000049', 'candidate049@examallocate.local', 'House 149, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260050', 'Priya Patil', '2002-03-24', 'Female', 'OBC', '9810000050', 'candidate050@examallocate.local', 'House 150, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260051', 'Rahul Patil', '2003-04-25', 'Male', 'SC', '9810000051', 'candidate051@examallocate.local', 'House 151, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260052', 'Riya Patil', '2004-05-26', 'Female', 'ST', '9810000052', 'candidate052@examallocate.local', 'House 152, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260053', 'Rohan Patil', '2005-06-27', 'Male', 'General', '9810000053', 'candidate053@examallocate.local', 'House 153, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260054', 'Sakshi Patil', '2000-07-01', 'Female', 'OBC', '9810000054', 'candidate054@examallocate.local', 'House 154, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260055', 'Sameer Patil', '2001-08-02', 'Male', 'SC', '9810000055', 'candidate055@examallocate.local', 'House 155, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260056', 'Sana Patil', '2002-09-03', 'Female', 'ST', '9810000056', 'candidate056@examallocate.local', 'House 156, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260057', 'Shivam Patil', '2003-10-04', 'Male', 'General', '9810000057', 'candidate057@examallocate.local', 'House 157, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260058', 'Shreya Patil', '2004-11-05', 'Female', 'OBC', '9810000058', 'candidate058@examallocate.local', 'House 158, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260059', 'Tanvi Patil', '2005-12-06', 'Male', 'SC', '9810000059', 'candidate059@examallocate.local', 'House 159, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260060', 'Varun Patil', '2000-01-07', 'Female', 'ST', '9810000060', 'candidate060@examallocate.local', 'House 160, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260061', 'Aarav Kulkarni', '2001-02-08', 'Male', 'General', '9810000061', 'candidate061@examallocate.local', 'House 161, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260062', 'Aditi Kulkarni', '2002-03-09', 'Female', 'OBC', '9810000062', 'candidate062@examallocate.local', 'House 162, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260063', 'Akash Kulkarni', '2003-04-10', 'Male', 'SC', '9810000063', 'candidate063@examallocate.local', 'House 163, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260064', 'Ananya Kulkarni', '2004-05-11', 'Female', 'ST', '9810000064', 'candidate064@examallocate.local', 'House 164, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260065', 'Arjun Kulkarni', '2005-06-12', 'Male', 'General', '9810000065', 'candidate065@examallocate.local', 'House 165, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260066', 'Avni Kulkarni', '2000-07-13', 'Female', 'OBC', '9810000066', 'candidate066@examallocate.local', 'House 166, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260067', 'Ayush Kulkarni', '2001-08-14', 'Male', 'SC', '9810000067', 'candidate067@examallocate.local', 'House 167, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260068', 'Diya Kulkarni', '2002-09-15', 'Female', 'ST', '9810000068', 'candidate068@examallocate.local', 'House 168, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260069', 'Ishaan Kulkarni', '2003-10-16', 'Male', 'General', '9810000069', 'candidate069@examallocate.local', 'House 169, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260070', 'Isha Kulkarni', '2004-11-17', 'Female', 'OBC', '9810000070', 'candidate070@examallocate.local', 'House 170, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260071', 'Kabir Kulkarni', '2005-12-18', 'Male', 'SC', '9810000071', 'candidate071@examallocate.local', 'House 171, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260072', 'Kavya Kulkarni', '2000-01-19', 'Female', 'ST', '9810000072', 'candidate072@examallocate.local', 'House 172, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260073', 'Karan Kulkarni', '2001-02-20', 'Male', 'General', '9810000073', 'candidate073@examallocate.local', 'House 173, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260074', 'Kiara Kulkarni', '2002-03-21', 'Female', 'OBC', '9810000074', 'candidate074@examallocate.local', 'House 174, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260075', 'Manav Kulkarni', '2003-04-22', 'Male', 'SC', '9810000075', 'candidate075@examallocate.local', 'House 175, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260076', 'Meera Kulkarni', '2004-05-23', 'Female', 'ST', '9810000076', 'candidate076@examallocate.local', 'House 176, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260077', 'Nikhil Kulkarni', '2005-06-24', 'Male', 'General', '9810000077', 'candidate077@examallocate.local', 'House 177, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260078', 'Nisha Kulkarni', '2000-07-25', 'Female', 'OBC', '9810000078', 'candidate078@examallocate.local', 'House 178, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260079', 'Pranav Kulkarni', '2001-08-26', 'Male', 'SC', '9810000079', 'candidate079@examallocate.local', 'House 179, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260080', 'Priya Kulkarni', '2002-09-27', 'Female', 'ST', '9810000080', 'candidate080@examallocate.local', 'House 180, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260081', 'Rahul Kulkarni', '2003-10-01', 'Male', 'General', '9810000081', 'candidate081@examallocate.local', 'House 181, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260082', 'Riya Kulkarni', '2004-11-02', 'Female', 'OBC', '9810000082', 'candidate082@examallocate.local', 'House 182, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260083', 'Rohan Kulkarni', '2005-12-03', 'Male', 'SC', '9810000083', 'candidate083@examallocate.local', 'House 183, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260084', 'Sakshi Kulkarni', '2000-01-04', 'Female', 'ST', '9810000084', 'candidate084@examallocate.local', 'House 184, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260085', 'Sameer Kulkarni', '2001-02-05', 'Male', 'General', '9810000085', 'candidate085@examallocate.local', 'House 185, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260086', 'Sana Kulkarni', '2002-03-06', 'Female', 'OBC', '9810000086', 'candidate086@examallocate.local', 'House 186, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260087', 'Shivam Kulkarni', '2003-04-07', 'Male', 'SC', '9810000087', 'candidate087@examallocate.local', 'House 187, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260088', 'Shreya Kulkarni', '2004-05-08', 'Female', 'ST', '9810000088', 'candidate088@examallocate.local', 'House 188, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260089', 'Tanvi Kulkarni', '2005-06-09', 'Male', 'General', '9810000089', 'candidate089@examallocate.local', 'House 189, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260090', 'Varun Kulkarni', '2000-07-10', 'Female', 'OBC', '9810000090', 'candidate090@examallocate.local', 'House 190, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260091', 'Aarav Deshmukh', '2001-08-11', 'Male', 'SC', '9810000091', 'candidate091@examallocate.local', 'House 191, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260092', 'Aditi Deshmukh', '2002-09-12', 'Female', 'ST', '9810000092', 'candidate092@examallocate.local', 'House 192, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260093', 'Akash Deshmukh', '2003-10-13', 'Male', 'General', '9810000093', 'candidate093@examallocate.local', 'House 193, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260094', 'Ananya Deshmukh', '2004-11-14', 'Female', 'OBC', '9810000094', 'candidate094@examallocate.local', 'House 194, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260095', 'Arjun Deshmukh', '2005-12-15', 'Male', 'SC', '9810000095', 'candidate095@examallocate.local', 'House 195, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260096', 'Avni Deshmukh', '2000-01-16', 'Female', 'ST', '9810000096', 'candidate096@examallocate.local', 'House 196, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260097', 'Ayush Deshmukh', '2001-02-17', 'Male', 'General', '9810000097', 'candidate097@examallocate.local', 'House 197, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260098', 'Diya Deshmukh', '2002-03-18', 'Female', 'OBC', '9810000098', 'candidate098@examallocate.local', 'House 198, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260099', 'Ishaan Deshmukh', '2003-04-19', 'Male', 'SC', '9810000099', 'candidate099@examallocate.local', 'House 199, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260100', 'Isha Deshmukh', '2004-05-20', 'Female', 'ST', '9810000100', 'candidate100@examallocate.local', 'House 200, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260101', 'Kabir Deshmukh', '2005-06-21', 'Male', 'General', '9810000101', 'candidate101@examallocate.local', 'House 201, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260102', 'Kavya Deshmukh', '2000-07-22', 'Female', 'OBC', '9810000102', 'candidate102@examallocate.local', 'House 202, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260103', 'Karan Deshmukh', '2001-08-23', 'Male', 'SC', '9810000103', 'candidate103@examallocate.local', 'House 203, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260104', 'Kiara Deshmukh', '2002-09-24', 'Female', 'ST', '9810000104', 'candidate104@examallocate.local', 'House 204, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260105', 'Manav Deshmukh', '2003-10-25', 'Male', 'General', '9810000105', 'candidate105@examallocate.local', 'House 205, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260106', 'Meera Deshmukh', '2004-11-26', 'Female', 'OBC', '9810000106', 'candidate106@examallocate.local', 'House 206, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260107', 'Nikhil Deshmukh', '2005-12-27', 'Male', 'SC', '9810000107', 'candidate107@examallocate.local', 'House 207, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260108', 'Nisha Deshmukh', '2000-01-01', 'Female', 'ST', '9810000108', 'candidate108@examallocate.local', 'House 208, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260109', 'Pranav Deshmukh', '2001-02-02', 'Male', 'General', '9810000109', 'candidate109@examallocate.local', 'House 209, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260110', 'Priya Deshmukh', '2002-03-03', 'Female', 'OBC', '9810000110', 'candidate110@examallocate.local', 'House 210, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260111', 'Rahul Deshmukh', '2003-04-04', 'Male', 'SC', '9810000111', 'candidate111@examallocate.local', 'House 211, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260112', 'Riya Deshmukh', '2004-05-05', 'Female', 'ST', '9810000112', 'candidate112@examallocate.local', 'House 212, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260113', 'Rohan Deshmukh', '2005-06-06', 'Male', 'General', '9810000113', 'candidate113@examallocate.local', 'House 213, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260114', 'Sakshi Deshmukh', '2000-07-07', 'Female', 'OBC', '9810000114', 'candidate114@examallocate.local', 'House 214, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260115', 'Sameer Deshmukh', '2001-08-08', 'Male', 'SC', '9810000115', 'candidate115@examallocate.local', 'House 215, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260116', 'Sana Deshmukh', '2002-09-09', 'Female', 'ST', '9810000116', 'candidate116@examallocate.local', 'House 216, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260117', 'Shivam Deshmukh', '2003-10-10', 'Male', 'General', '9810000117', 'candidate117@examallocate.local', 'House 217, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260118', 'Shreya Deshmukh', '2004-11-11', 'Female', 'OBC', '9810000118', 'candidate118@examallocate.local', 'House 218, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260119', 'Tanvi Deshmukh', '2005-12-12', 'Male', 'SC', '9810000119', 'candidate119@examallocate.local', 'House 219, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260120', 'Varun Deshmukh', '2000-01-13', 'Female', 'ST', '9810000120', 'candidate120@examallocate.local', 'House 220, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260121', 'Aarav Joshi', '2001-02-14', 'Male', 'General', '9810000121', 'candidate121@examallocate.local', 'House 221, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260122', 'Aditi Joshi', '2002-03-15', 'Female', 'OBC', '9810000122', 'candidate122@examallocate.local', 'House 222, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260123', 'Akash Joshi', '2003-04-16', 'Male', 'SC', '9810000123', 'candidate123@examallocate.local', 'House 223, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260124', 'Ananya Joshi', '2004-05-17', 'Female', 'ST', '9810000124', 'candidate124@examallocate.local', 'House 224, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260125', 'Arjun Joshi', '2005-06-18', 'Male', 'General', '9810000125', 'candidate125@examallocate.local', 'House 225, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260126', 'Avni Joshi', '2000-07-19', 'Female', 'OBC', '9810000126', 'candidate126@examallocate.local', 'House 226, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260127', 'Ayush Joshi', '2001-08-20', 'Male', 'SC', '9810000127', 'candidate127@examallocate.local', 'House 227, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260128', 'Diya Joshi', '2002-09-21', 'Female', 'ST', '9810000128', 'candidate128@examallocate.local', 'House 228, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260129', 'Ishaan Joshi', '2003-10-22', 'Male', 'General', '9810000129', 'candidate129@examallocate.local', 'House 229, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260130', 'Isha Joshi', '2004-11-23', 'Female', 'OBC', '9810000130', 'candidate130@examallocate.local', 'House 230, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260131', 'Kabir Joshi', '2005-12-24', 'Male', 'SC', '9810000131', 'candidate131@examallocate.local', 'House 231, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260132', 'Kavya Joshi', '2000-01-25', 'Female', 'ST', '9810000132', 'candidate132@examallocate.local', 'House 232, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260133', 'Karan Joshi', '2001-02-26', 'Male', 'General', '9810000133', 'candidate133@examallocate.local', 'House 233, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260134', 'Kiara Joshi', '2002-03-27', 'Female', 'OBC', '9810000134', 'candidate134@examallocate.local', 'House 234, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260135', 'Manav Joshi', '2003-04-01', 'Male', 'SC', '9810000135', 'candidate135@examallocate.local', 'House 235, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260136', 'Meera Joshi', '2004-05-02', 'Female', 'ST', '9810000136', 'candidate136@examallocate.local', 'House 236, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260137', 'Nikhil Joshi', '2005-06-03', 'Male', 'General', '9810000137', 'candidate137@examallocate.local', 'House 237, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260138', 'Nisha Joshi', '2000-07-04', 'Female', 'OBC', '9810000138', 'candidate138@examallocate.local', 'House 238, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260139', 'Pranav Joshi', '2001-08-05', 'Male', 'SC', '9810000139', 'candidate139@examallocate.local', 'House 239, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260140', 'Priya Joshi', '2002-09-06', 'Female', 'ST', '9810000140', 'candidate140@examallocate.local', 'House 240, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10'),
+('APP20260141', 'Rahul Joshi', '2003-10-07', 'Male', 'General', '9810000141', 'candidate141@examallocate.local', 'House 241, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 1'),
+('APP20260142', 'Riya Joshi', '2004-11-08', 'Female', 'OBC', '9810000142', 'candidate142@examallocate.local', 'House 242, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 2'),
+('APP20260143', 'Rohan Joshi', '2005-12-09', 'Male', 'SC', '9810000143', 'candidate143@examallocate.local', 'House 243, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 3'),
+('APP20260144', 'Sakshi Joshi', '2000-01-10', 'Female', 'ST', '9810000144', 'candidate144@examallocate.local', 'House 244, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 4'),
+('APP20260145', 'Sameer Joshi', '2001-02-11', 'Male', 'General', '9810000145', 'candidate145@examallocate.local', 'House 245, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 5'),
+('APP20260146', 'Sana Joshi', '2002-03-12', 'Female', 'OBC', '9810000146', 'candidate146@examallocate.local', 'House 246, Main Road', 'Pune', 'Maharashtra', '411038', 'Pune', 'Mumbai', 'College Candidate Institute 6'),
+('APP20260147', 'Shivam Joshi', '2003-04-13', 'Male', 'SC', '9810000147', 'candidate147@examallocate.local', 'House 247, Main Road', 'Mumbai', 'Maharashtra', '400001', 'Mumbai', 'Pune', 'College Candidate Institute 7'),
+('APP20260148', 'Shreya Joshi', '2004-05-14', 'Female', 'ST', '9810000148', 'candidate148@examallocate.local', 'House 248, Main Road', 'Nagpur', 'Maharashtra', '440001', 'Nagpur', 'Delhi', 'College Candidate Institute 8'),
+('APP20260149', 'Tanvi Joshi', '2005-06-15', 'Male', 'General', '9810000149', 'candidate149@examallocate.local', 'House 249, Main Road', 'Nashik', 'Maharashtra', '422001', 'Bengaluru', 'Nagpur', 'College Candidate Institute 9'),
+('APP20260150', 'Varun Joshi', '2000-07-16', 'Female', 'OBC', '9810000150', 'candidate150@examallocate.local', 'House 250, Main Road', 'Aurangabad', 'Maharashtra', '431001', 'Hyderabad', 'Bengaluru', 'College Candidate Institute 10');
+
+
+/* ============================================================
+   21. INITIAL ROOM-SESSION OCCUPANCY
    ============================================================ */
 
 INSERT INTO room_occupancy (session_id, room_id, occupied)
@@ -560,97 +719,39 @@ CROSS JOIN room r;
 
 
 /* ============================================================
-   21. USEFUL VIEWS
-   These do not create a separate database/folder.
-   They are simply reusable MySQL queries.
+   22. USEFUL VIEWS
    ============================================================ */
 
 CREATE OR REPLACE VIEW v_exam_sessions AS
-SELECT
-    es.session_id,
-    es.exam_name,
-    es.exam_date,
-    es.shift_name,
-    es.start_time,
-    es.end_time,
-    es.status
+SELECT es.session_id, es.exam_name, es.exam_date, es.shift_name,
+       es.start_time, es.end_time, es.status
 FROM exam_session es
 ORDER BY es.exam_date, es.start_time;
 
-
 CREATE OR REPLACE VIEW v_registration_status AS
-SELECT
-    r.reg_id,
-    s.application_no,
-    s.name AS candidate_name,
-    s.email,
-    es.exam_name,
-    es.exam_date,
-    es.shift_name,
-    es.start_time,
-    es.end_time,
-    r.reg_date,
-    CASE
-        WHEN sa.allocation_id IS NULL THEN 'REGISTERED'
-        ELSE 'SEAT_ALLOCATED'
-    END AS registration_status,
-    ec.center_name,
-    ec.city,
-    ro.room_number,
-    ro.floor,
-    sa.seat_number
+SELECT r.reg_id, s.application_no, s.name AS candidate_name, s.email,
+       es.exam_name, es.exam_date, es.shift_name, es.start_time, es.end_time,
+       r.reg_date,
+       CASE WHEN sa.allocation_id IS NULL THEN 'REGISTERED' ELSE 'SEAT_ALLOCATED' END AS registration_status,
+       ec.center_name, ec.city, ro.room_number, ro.floor, sa.seat_number
 FROM registration r
-JOIN student s
-    ON s.student_id = r.student_id
-JOIN exam_session es
-    ON es.session_id = r.session_id
-LEFT JOIN seat_allocation sa
-    ON sa.reg_id = r.reg_id
-LEFT JOIN exam_center ec
-    ON ec.center_id = sa.center_id
-LEFT JOIN room ro
-    ON ro.room_id = sa.room_id;
+JOIN student s ON s.student_id = r.student_id
+JOIN exam_session es ON es.session_id = r.session_id
+LEFT JOIN seat_allocation sa ON sa.reg_id = r.reg_id
+LEFT JOIN exam_center ec ON ec.center_id = sa.center_id
+LEFT JOIN room ro ON ro.room_id = sa.room_id;
 
 
 /* ============================================================
-   22. TEST / VERIFICATION QUERIES
-   At this point candidate-dependent tables are intentionally
-   EMPTY. Candidates are created by the frontend.
+   23. TEST / VERIFICATION QUERIES
    ============================================================ */
 
 SELECT 'Courses' AS item, COUNT(*) AS total FROM course
-UNION ALL
-SELECT 'Exam Sessions', COUNT(*) FROM exam_session
-UNION ALL
-SELECT 'Exam Centres', COUNT(*) FROM exam_center
-UNION ALL
-SELECT 'Rooms', COUNT(*) FROM room
-UNION ALL
-SELECT 'Invigilators', COUNT(*) FROM invigilator
-UNION ALL
-SELECT 'Candidates', COUNT(*) FROM student
-UNION ALL
-SELECT 'Registrations', COUNT(*) FROM registration
-UNION ALL
-SELECT 'Seat Allocations', COUNT(*) FROM seat_allocation
-UNION ALL
-SELECT 'Admit Cards', COUNT(*) FROM admit_card
-UNION ALL
-SELECT 'Grievances', COUNT(*) FROM grievance;
+UNION ALL SELECT 'Exam Sessions', COUNT(*) FROM exam_session
+UNION ALL SELECT 'Exam Centres', COUNT(*) FROM exam_center
+UNION ALL SELECT 'Rooms', COUNT(*) FROM room
+UNION ALL SELECT 'Candidates', COUNT(*) FROM student
+UNION ALL SELECT 'Invigilators', COUNT(*) FROM invigilator;
 
-
-/* ============================================================
-   23. OPTIONAL DEMO QUERIES
-   Uncomment when you want to inspect data in Workbench.
-
-   SELECT * FROM course;
-   SELECT * FROM exam_session ORDER BY exam_date, start_time;
-   SELECT * FROM exam_center;
-   SELECT * FROM room;
-   SELECT * FROM v_registration_status;
-   ============================================================ */
-
-
-/* ============================================================
-   END OF NPTEL-STYLE EXAMALLOCATE DATABASE
-   ============================================================ */
+USE ExamAllocateDB;
+SHOW tables;
