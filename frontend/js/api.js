@@ -1,5 +1,5 @@
-// Set this to the backend laptop address for a multi-laptop demo.
-const BACKEND = 'http://10.164.196.196:8080';
+
+const BACKEND = 'https://examallocate-backend.onrender.com';
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
